@@ -11,6 +11,10 @@ public class Model {
     public GameObjects getGameObjects() {
         return gameObjects;
     }
+    
+    public void setGameLost(boolest flag){
+        isGameLost = flag;
+    }
 
     public void doARandomMove(GameObject gameObject, Direction direction) {
         if (canMove(gameObject, direction)) {
