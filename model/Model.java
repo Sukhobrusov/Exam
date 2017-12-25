@@ -202,6 +202,7 @@ public class Model {
 
     public void restart(){
         gameObjects = levelLoader.getLevel();
+        isGameLost = false;
     }
 
 }
