@@ -63,62 +63,43 @@ public class View extends JPanel {
     public class KeyHandler extends KeyAdapter{
         @Override
         public void keyPressed(KeyEvent e) {
+            Direction direction;
             switch (e.getKeyCode()){
                 case KeyEvent.VK_Q:
-                    for(GameObject gameObject : controller.getGameObjects().getGameObjects().keySet()){
-                        if(gameObject instanceof Capucin||gameObject instanceof Baboon)
-                            controller.move(gameObject, Direction.LEFT_UP);
-                    }
-                    update();
+                    direction = Direction.LEFT_UP;
                     break;
-                case KeyEvent.VK_W:
-                    for(GameObject gameObject : controller.getGameObjects().getGameObjects().keySet()){
-                        if(gameObject instanceof Capucin||gameObject instanceof Baboon)
-                            controller.move(gameObject, Direction.UP);
-                    }
-                    update();
+                case KeyEvent.VK_W: direction = Direction.UP;
                     break;
-                case KeyEvent.VK_E:
-                    for(GameObject gameObject : controller.getGameObjects().getGameObjects().keySet()){
-                        if(gameObject instanceof Capucin||gameObject instanceof Baboon)
-                            controller.move(gameObject, Direction.RIGHT_UP);
-                    }
-                    update();
+                case KeyEvent.VK_E: direction = Direction.RIGHT_UP;
                     break;
-                case KeyEvent.VK_Z:
-                    for(GameObject gameObject : controller.getGameObjects().getGameObjects().keySet()){
-                        if(gameObject instanceof Capucin||gameObject instanceof Baboon)
-                            controller.move(gameObject, Direction.LEFT_DOWN);
-                    }
-                    update();
+                case KeyEvent.VK_Z: direction = Direction.LEFT_DOWN;
                     break;
-                case KeyEvent.VK_X:
-                    for(GameObject gameObject : controller.getGameObjects().getGameObjects().keySet()){
-                        if(gameObject instanceof Capucin||gameObject instanceof Baboon)
-                            controller.move(gameObject, Direction.DOWN);
-                    }
-                    update();
+                case KeyEvent.VK_X: direction = Direction.DOWN;
                     break;
-                case KeyEvent.VK_C:
-                    for(GameObject gameObject : controller.getGameObjects().getGameObjects().keySet()){
-                        if(gameObject instanceof Capucin||gameObject instanceof Baboon)
-                            controller.move(gameObject, Direction.RIGHT_DOWN);
-                    }
-                    update();
+                case KeyEvent.VK_C: direction = Direction.RIGHT_DOWN;
                     break;
-                case KeyEvent.VK_P:
-                    for(GameObject gameObject : controller.getGameObjects().getGameObjects().keySet()){
-                        if(gameObject instanceof Capucin||gameObject instanceof Baboon)
-                            controller.move(gameObject, Direction.values()[ThreadLocalRandom.current().nextInt(6)]);
-                    }
-                    update();
+                case KeyEvent.VK_P: direction = Direction.values()[ThreadLocalRandom.current().nextInt(6);
                     break;
-
                 case KeyEvent.VK_Y:
                     controller.restart();
                     update();
-                    break;
+                    return;
             }
+            Function isAllowed = new Function<Boolean, GameObject>() {
+                // might need to replace this with Boolean (capital letter B)
+                @Override
+                public boolean apply(GameObject testSubject) {
+                    return testSubject instanceof Capucin ||
+                            testSubject instanceof Baboon;
+                }
+            };
+                                                                   
+                                                                  
+            for(GameObject animal : controller.getGameObjects().getGameObjects().keySet()) {
+                if(isAllowed.apply(animal))
+                    controller.move(animal, direction);
+            }
+
         }
     }
 }
