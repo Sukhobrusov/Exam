@@ -85,6 +85,10 @@ public class View extends JPanel {
                     update();
                     return;
             }
+            if (direction == null) {
+                System.out.println("direction is null, press another button"); //logger preff
+                return;
+            }
             Function isAllowed = new Function<Boolean, GameObject>() {
                 // might need to replace this with Boolean (capital letter B)
                 @Override
